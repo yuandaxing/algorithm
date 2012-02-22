@@ -83,6 +83,7 @@ static public class ValWrapper{
         ArrayList<ArrayList<Integer>> ret = new ArrayList<ArrayList<Integer>>();
         if(aali.size() < 1) 
         	return ret;
+        
         ret.add(aali.get(0));
         ArrayList<Integer> pre = aali.get(0);
         for(int i = 1; i < aali.size(); i++){
