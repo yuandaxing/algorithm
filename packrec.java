@@ -15,6 +15,7 @@ LANG: JAVA
 TASK: packrec
 */
 public class packrec {
+	
 	public static class Rectangle implements Comparable<Rectangle>{
 		int h;
 		int w;
@@ -86,6 +87,8 @@ public class packrec {
 		}
 		return max;
 	}
+	
+	
 	public static void mayAdd(int h, int w){
 		int area = h * w;
 		if(area > minArea)
