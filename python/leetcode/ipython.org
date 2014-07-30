@@ -1,0 +1,12 @@
+* IPython
+** i
+   i stands for interactive
+*** ? ??
+    first you should import os module, then os?, os?? (deeper)
+*** run
+    show variable values when exceptions, 
+*** demo
+    >>> ... can also work in ipython
+    define python variable, can visit in the shell
+    sympy symbolic mathmatic system
+    
