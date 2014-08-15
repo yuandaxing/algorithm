@@ -5,6 +5,7 @@ import os
 import urlparse
 queue = []
 queue.append('http://jandan.net/ooxx')
+localPath = 'C:/Users/dayua/TDDOWNLOAD/jandan'
 old = False
 while len(queue) and not old  :
     url = queue.pop(0)
@@ -13,17 +14,22 @@ while len(queue) and not old  :
     for m in re.findall(r'''\<p\>\<img src="([^"]+)\"''', content) :
         print m
         result=urlparse.urlparse(m)
-        localImg = 'C:/TDDOWNLOAD/jandan/'+result.path
+        localImg = localPath + result.path
         dirName = os.path.dirname(localImg)
         if not os.path.exists(dirName) : os.makedirs(dirName)
         try :
-            localFile = 'C:/TDDOWNLOAD/jandan/'+result.path
-            if os.path.exists(localFile) :
+            if os.path.exists(localImg) :
                 old = True
+                print localImg, 'already existing'
                 break
-            urllib.urlretrieve(m, localFile)
+            urllib.urlretrieve(m, localImg)
         except Exception as e:
             print e
     nextPage = re.findall(r'''<a class="previous-comment-page" href="([^"]+)"''', content)[0]
     print nextPage
     queue.append(nextPage)
+
+command = 'find ' + localPath +'''  -name '*.jpg' -o -name '*.gif' -o -name '*.JPG' -o -name '*.png' -exec cp -n {} /cygdrive/c/develop/django/static/picture_slide/ \; '''
+
+print command 
+print os.system(command)
