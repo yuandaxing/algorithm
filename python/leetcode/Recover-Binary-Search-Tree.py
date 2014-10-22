@@ -10,31 +10,42 @@
     # then sort the array
     # inorder visit the tree, then if the element is not equal to the 
      # array, change the values
-# algorithm 2:
+# algorithm 2: could not work
 #     every node return the smallest, biggest, the most lower two node 
 #     which have not binary search tree properties
     
 class Solution:
     # @param root, a tree node
     # @return a tree node
-    def findLowestNode(self, root) :
-        results = [None, None]
-        left, right = list(results), list(results)
+    def inorderVisit(self, root, contradict) :
         if not root :
-            return results
-        if root.left :
-            left = self.findLowestNode(root.left)
-        if root.right :
-            right = self.findLowestNode(root.right)
-        lowerest = 
-        leftsmallest = left[1] if root.left else root.val
-        rightmost = rightmost[0] if root.right else root.val 
-            
+            return contradict
+        curcon = contradict
+        curcon = self.inorderVisit(root.left, curcon)
+        v1, v2 = curcon[0], curcon[1]
+        if not v1 :
+            curcon = [root.val, None]
+        elif not v1 :
+            if root.val < v1.val :
+                curcon = [v1, root]
+            else :
+                curcon = [root, None]
+        return self.inorderVisit(root.right, curcon)
     def recoverTree(self, root):
-        results = [None, None, None, None]
-        left, right = list(results), list(results)
-        if not root :
-            return results
-        if root.left :
-            left = 
-            
+        z = self.inorderVisit(root, [None, None])
+        print z
+        v1, v2 = z[0], z[1]
+        v1.val, v2.val = v2.val, v1.val
+        return root
+        
+
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+t1, t2, t3 = TreeNode(1), TreeNode(2), TreeNode(3)
+t1.left = t2
+t2.left = t3
+s = Solution()
+s.recoverTree(t1)
