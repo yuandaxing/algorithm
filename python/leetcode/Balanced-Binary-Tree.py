@@ -29,3 +29,5 @@ t1, t2 = Tree(None, None, 0), Tree(None, None, 0)
 t3 = Tree(t1, t2, 0)
 sol = Solution()
 print sol.isBalanced(t3)
+
+
