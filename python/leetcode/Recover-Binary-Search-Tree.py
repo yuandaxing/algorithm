@@ -24,8 +24,8 @@ class Solution:
         curcon = self.inorderVisit(root.left, curcon)
         v1, v2 = curcon[0], curcon[1]
         if not v1 :
-            curcon = [root.val, None]
-        elif not v1 :
+            curcon = [root, None]
+        else:
             if root.val < v1.val :
                 curcon = [v1, root]
             else :
@@ -33,10 +33,9 @@ class Solution:
         return self.inorderVisit(root.right, curcon)
     def recoverTree(self, root):
         z = self.inorderVisit(root, [None, None])
-        print z
         v1, v2 = z[0], z[1]
         v1.val, v2.val = v2.val, v1.val
-        return root
+        print v1.val, v2.val
         
 
 class TreeNode:
