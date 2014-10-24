@@ -29,14 +29,13 @@ class Solution:
             if root.val < v1.val :
                 curcon = [v1, root]
             else :
-                curcon = [root, None]
+                curcon = curcon if v2 else [root, None]
         return self.inorderVisit(root.right, curcon)
     def recoverTree(self, root):
         z = self.inorderVisit(root, [None, None])
         v1, v2 = z[0], z[1]
         v1.val, v2.val = v2.val, v1.val
-        print v1.val, v2.val
-        
+        return root
 
 class TreeNode:
     def __init__(self, x):
