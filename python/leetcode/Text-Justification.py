@@ -15,7 +15,7 @@ class Solution:
             
         for i in range(len(words)) :
             for j in range(1, len(words)-i+1) :
-                count = accu[i+j-1]-accu[i]
+                count = accu[i+j-1]-(0 if i-1 < 0 else accu[i-1])
                 left = L - count - j + 1
                 if left < 0 :
                     break
@@ -28,8 +28,7 @@ class Solution:
                     F[0][j] = F[0][j-k] + F[j-k][k]
                     trace[j] = j-k
         
-        slice = []
-        i = len(words)
+        slice, i = [], len(words)
         while trace[i] :
             slice.append(trace[i])
             i = trace[i]
@@ -41,11 +40,10 @@ class Solution:
             last = True if s == len(slice)-1 else False 
             space = F[wordn][j]
             num = j
-            rem, each = (space % (num-1), space / (num -1)) if (num-1) \
-                        else (space, 0)
-            if last :
-                each = 1 if space else 0
-                rem = space - num + 1 if space else 0
+            rem, each = space, 0
+            if num > 1 :
+                rem, each = (space - num + 1, 1) if last else \
+                            (space % (num-1), space / (num-1))
             cur = words[wordn]
             for z in range(1, j) :
                 cur += ' '*each
@@ -59,24 +57,11 @@ class Solution:
             wordn = slice[s]
         return text 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+test1 = ["a"]
 words = ["This", "is", "an", "example", "of", "text", "justification."]
 words2 = ["a","b","c","d","e"]
+words3 = ["What","must","be","shall","be."]
 sol = Solution()
-print sol.fullJustify(words2, 1)
+print sol.fullJustify(words3, 12)
                 
                 
