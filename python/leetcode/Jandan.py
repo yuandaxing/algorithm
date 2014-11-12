@@ -21,7 +21,9 @@ while len(queue) and not old  :
             if os.path.exists(localImg) :
                 old = True
                 print localImg, 'already existing'
+#                continue
                 break
+
             urllib.urlretrieve(m, localImg)
         except Exception as e:
             print e
