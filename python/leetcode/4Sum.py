@@ -12,7 +12,7 @@ class Solution:
             else :
 		j-=1
         return result
-    def fourSum(self, num, target):
+    def fourSum1(self, num, target):
         num.sort()
         result = []
         for i in range(len(num)) :
@@ -27,6 +27,22 @@ class Solution:
         result = set(map(tuple, result))
         result = map(list, result)
         return result 
+    def fourSum(self, num, target) :
+        num.sort()
+        s = {}
+        for i in range(len(num)) :
+            for j in range(i+1, len(num)) :
+                v = num[i] + num[j]
+                s.setdefault(v, [])
+                s[v].append([num[i], num[j]])
+        for i in range(len(num)) :
+            if i > 0 and num[i] == num[i-1] : continue 
+            for j in range(i+1, len(num)) :
+                cur = num[i] + num[j]
+                left = target - cur
+                if s.containskey(left) :
+                    for 
+
 
 s = [1, 0, -1, 0, -2, 2]
 sol = Solution()
